@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using So_Us.DataAccess;
+using SosuPower.DataAccess;
 
 namespace SO_USApi
 {
@@ -20,6 +21,9 @@ namespace SO_USApi
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            //builder.Services.AddScoped<>
+            builder.Services.AddScoped<IRepository<SoUs.Entities.Employee>, Repository<SoUs.Entities.Employee>>();
+            builder.Services.AddScoped<IRepository<SoUs.Entities.Assignment>, Repository<SoUs.Entities.Assignment>>();
 
 
             var app = builder.Build();

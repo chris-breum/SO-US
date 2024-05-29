@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\So-Us.DataAccess\So-Us.DataAccess.csproj" />
-    <ProjectReference Include="..\So-Us.Entities\So-Us.Entities.csproj" />
+    <ProjectReference Include="..\So-Us.DataAccess\SoUs.DataAccess.csproj" />
+    <ProjectReference Include="..\So-Us.Entities\SoUs.Entities.csproj" />
   </ItemGroup>
 
 </Project>

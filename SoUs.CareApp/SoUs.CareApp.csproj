@@ -67,9 +67,4 @@
 	  <ProjectReference Include="..\So-Us.Entities\So-Us.Entities.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Views\" />
-	  <Folder Include="viewModels\" />
-	</ItemGroup>
-
 </Project>

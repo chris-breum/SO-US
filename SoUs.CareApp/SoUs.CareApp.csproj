@@ -65,6 +65,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\So-Us.Entities\SoUs.Entities.csproj" />
+	  <ProjectReference Include="..\SoUs.services\SoUs.services.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -27,7 +27,7 @@
         <CollectionView Grid.Row="2"
                         Grid.RowSpan="2" 
                         BackgroundColor="AliceBlue"
-                          ItemsSource="{Binding TodaysAssignments}">>
+                          ItemsSource="{Binding TodaysAssignments}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="Model:Assignment">
                     <Grid Padding="10">

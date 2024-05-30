@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoUs.DataAccess", "So-Us.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoUs.Entities", "So-Us.Entities\SoUs.Entities.csproj", "{F80DDA0E-9EFC-4448-8E23-A67055A4C1D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoUs.CareApp", "SoUs.CareApp\SoUs.CareApp.csproj", "{3AFB45A6-8C93-4D7F-8DE2-BD45E9DE6367}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoUs.CareApp", "SoUs.CareApp\SoUs.CareApp.csproj", "{3AFB45A6-8C93-4D7F-8DE2-BD45E9DE6367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoUs.services", "SoUs.services\SoUs.services.csproj", "{F90E22AD-C2E7-4B51-8F44-FDCDB55631FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{3AFB45A6-8C93-4D7F-8DE2-BD45E9DE6367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AFB45A6-8C93-4D7F-8DE2-BD45E9DE6367}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3AFB45A6-8C93-4D7F-8DE2-BD45E9DE6367}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F90E22AD-C2E7-4B51-8F44-FDCDB55631FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90E22AD-C2E7-4B51-8F44-FDCDB55631FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90E22AD-C2E7-4B51-8F44-FDCDB55631FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90E22AD-C2E7-4B51-8F44-FDCDB55631FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

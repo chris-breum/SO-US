@@ -13,9 +13,11 @@ namespace SoUs.Services
 
         public async Task<List<Assignment>> GetAssignmentsAsync(DateTime date, Employee employee)
         {
-            List<Assignment> assignmentList = new List<Assignment>();
-            try { 
-                var response = await GetHttpAsync($"Assignment/GetAssignmentsForEmployeeByDate?employeeId=2&date=2024-05-24");
+            try {
+                List<Assignment> assignmentList = new();
+                date = new DateTime(2024, 05, 24);
+
+                var response = await GetHttpAsync($"Assignment/GetAssignmentsForEmployeeByDate?date={date.ToString("yyyy-MM-dd")}&employeeId={employee.EmployeeId}");
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -25,23 +27,6 @@ namespace SoUs.Services
                 assignmentList = await response.Content.ReadFromJsonAsync<List<Assignment>>();
 
                 return assignmentList;
-            }
-            catch (HttpRequestException ex)
-            {
-                // Log the detailed exception message and stack trace
-                Console.WriteLine($"HttpRequestException: {ex.Message}");
-                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-                }
-                throw new ApplicationException("An error occurred while sending the request.", ex);
-            }
-            catch (TaskCanceledException ex) when (ex.CancellationToken == CancellationToken.None)
-            {
-                // Handle timeout exceptions specifically
-                Console.WriteLine("Request timed out.");
-                throw new TimeoutException("The request timed out.", ex);
             }
             catch (Exception ex)
             {

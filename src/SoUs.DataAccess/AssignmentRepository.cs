@@ -13,12 +13,17 @@ namespace SoUs.DataAccess
     {
         public IEnumerable<Assignment> GetAssignmentsForEmployee(DateTime date, int employeeId)
         {
-            return _context.Assignments.Where(a => a.Employees.Any(e => e.EmployeeId == employeeId) && a.TimeStart.Date == date.Date).Include(a => a.Employees).Include(a => a.Medicines).ToList();
+            return _context.Assignments
+                .Where(a => a.Employees.Any(e => e.EmployeeId == employeeId))
+                .Include(a => a.Resident);
         }
 
         public Assignment GetBy(int id)
         {
-            return _context.Assignments.Include(a => a.Employees).Include(a => a.Medicines).FirstOrDefault(a => a.AssignmentId == id);
+            return _context.Assignments
+                .Include(a => a.Employees)
+                .Include(a => a.Resident)
+                .FirstOrDefault(a => a.AssignmentId == id);
         }
     }
 }

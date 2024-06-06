@@ -12,8 +12,8 @@ using SoUs.DataAccess;
 namespace SoUs.DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240604073331_SoUs")]
-    partial class SoUs
+    [Migration("20240604091305_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,13 +91,6 @@ namespace SoUs.DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssignmentId"));
-
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ResidentId")
                         .HasColumnType("int");
@@ -199,12 +192,12 @@ namespace SoUs.DataAccess.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AssignmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SubTaskId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Unit")
                         .IsRequired()
@@ -212,7 +205,7 @@ namespace SoUs.DataAccess.Migrations
 
                     b.HasKey("MedicineId");
 
-                    b.HasIndex("AssignmentId");
+                    b.HasIndex("SubTaskId");
 
                     b.ToTable("Medications");
                 });
@@ -296,6 +289,31 @@ namespace SoUs.DataAccess.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("SoUs.Entities.SubTask", b =>
+                {
+                    b.Property<int>("SubTaskId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubTaskId"));
+
+                    b.Property<int>("AssignmentId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SubTaskId");
+
+                    b.HasIndex("AssignmentId");
+
+                    b.ToTable("SubTasks");
+                });
+
             modelBuilder.Entity("AssignmentEmployee", b =>
                 {
                     b.HasOne("SoUs.Entities.Employee", null)
@@ -368,9 +386,9 @@ namespace SoUs.DataAccess.Migrations
 
             modelBuilder.Entity("SoUs.Entities.Medicine", b =>
                 {
-                    b.HasOne("SoUs.Entities.Assignment", null)
+                    b.HasOne("SoUs.Entities.SubTask", null)
                         .WithMany("Medicines")
-                        .HasForeignKey("AssignmentId");
+                        .HasForeignKey("SubTaskId");
                 });
 
             modelBuilder.Entity("SoUs.Entities.Prescription", b =>
@@ -387,9 +405,20 @@ namespace SoUs.DataAccess.Migrations
                         .HasForeignKey("CareCenterId");
                 });
 
+            modelBuilder.Entity("SoUs.Entities.SubTask", b =>
+                {
+                    b.HasOne("SoUs.Entities.Assignment", "Assignment")
+                        .WithMany("SubTasks")
+                        .HasForeignKey("AssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Assignment");
+                });
+
             modelBuilder.Entity("SoUs.Entities.Assignment", b =>
                 {
-                    b.Navigation("Medicines");
+                    b.Navigation("SubTasks");
                 });
 
             modelBuilder.Entity("SoUs.Entities.CareCenter", b =>
@@ -402,6 +431,11 @@ namespace SoUs.DataAccess.Migrations
                     b.Navigation("Diagnoses");
 
                     b.Navigation("Prescriptions");
+                });
+
+            modelBuilder.Entity("SoUs.Entities.SubTask", b =>
+                {
+                    b.Navigation("Medicines");
                 });
 #pragma warning restore 612, 618
         }
